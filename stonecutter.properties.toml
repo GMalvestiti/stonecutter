@@ -1,0 +1,39 @@
+# See https://stonecutter.kikugie.dev/wiki/config/properties#centralized-properties
+mod.id = "template"
+mod.name = "Template"
+mod.group = "com.gmalvestiti"
+mod.version = "1.0.0"
+
+loomx.loom_version = "1.17-SNAPSHOT"
+
+deps.fabric_loader = "0.19.3"
+deps.caffeine = "3.2.3"
+
+mod.description = "Template description"
+mod.author = "Riser876"
+mod.contact_homepage = "https://modrinth.com/user/Riser876"
+mod.contact_sources = "https://github.com/GMalvestiti/Template"
+mod.contact_issues = "https://github.com/GMalvestiti/Template/issues"
+mod.license = "MIT"
+
+["1.21"]
+
+[fabric."1.21"]
+# Mod compatibility range in fabric.mod.json/neoforge.mods.toml
+mod.mc_compat = ">=1.21 <=1.21.1"
+deps.fabric_api = "0.102.0+1.21"
+
+[neoforge."1.21"]
+mod.mc_compat = "[1.21, 1.21.1]"
+deps.neoforge_loader = "21.0.167"
+
+
+["26.1"]
+
+[fabric."26.1"]
+mod.mc_compat = ">=26.1"
+deps.fabric_api = "0.145.1+26.1"
+
+[neoforge."26.1"]
+mod.mc_compat = "[26.1,)"
+deps.neoforge_loader = "26.1.0.19-beta"

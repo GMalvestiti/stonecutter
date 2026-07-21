@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.gmalvestiti.template.mixin",
+  "compatibilityLevel": "${java}",
+  "mixins": [
+      "ServerLevelMixin"
+  ],
+  "plugin": "com.gmalvestiti.template.mixin.TemplateMixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

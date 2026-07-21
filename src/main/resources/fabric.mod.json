@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "${description}",
+  "authors": [
+    "${author}"
+  ],
+  "contact": {
+    "homepage": "${contact_homepage}",
+    "sources": "${contact_sources}",
+    "issues": "${contact_issues}"
+  },
+  "license": "${license}",
+  "icon": "assets/${id}/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.gmalvestiti.template.TemplateFabric"
+    ],
+    "fabric-datagen": [
+      "com.gmalvestiti.template.datagen.fabric.DataGeneratorFabric"
+    ]
+  },
+  "mixins": [
+    "${id}.mixins.json"
+  ],
+  "accessWidener": "${id}.ct",
+  "depends": {
+    "fabricloader": ">=${fabric_loader}",
+    "fabric-api": ">=${fabric_api}",
+    "minecraft": "${minecraft}"
+  }
+}
