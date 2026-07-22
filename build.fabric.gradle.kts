@@ -2,11 +2,12 @@ plugins {
     id("build.common")
     id("dev.kikugie.loom-back-compat")
     id("com.gradleup.shadow") version "9.5.1"
+    id("me.modmuss50.mod-publish-plugin") version "2.1.1"
 }
 
 // DO NOT set group = ...!
-version = "${property("mod.version")}+${sc.current.version}"
-base.archivesName = "${property("mod.id") as String}-fabric"
+version = "${property("mod.version")}-${sc.current.version}-fabric"
+base.archivesName = property("mod.id") as String
 
 sourceSets.main {
     resources.exclude("**/.cache")
@@ -80,7 +81,7 @@ dependencies {
 
 tasks {
     register<Copy>("buildAndCollect") {
-        group = "build"
+        group = "custom"
         description = "Builds mod jars and copies results to `build/libs/{mod version}/`"
 
         dependsOn(build)

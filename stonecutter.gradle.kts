@@ -35,3 +35,28 @@ stonecutter parameters {
         }
     }
 }
+
+tasks {
+    register("generateResources") {
+        group = "custom"
+        description = "Run datagen for all versions"
+        dependsOn(stonecutter.tasks.named("runDatagen") {
+            metadata.project.endsWith("fabric")
+        })
+        dependsOn(stonecutter.tasks.named("runData") {
+            metadata.project.endsWith("neoforge")
+        })
+    }
+
+    register("runActiveClient") {
+        group = "custom"
+        description = "Run client of the active Stonecutter version"
+        dependsOn(stonecutter.current!!.project + ":runClient")
+    }
+
+    register("runActiveServer") {
+        group = "custom"
+        description = "Run server of the active Stonecutter version"
+        dependsOn(stonecutter.current!!.project + ":runServer")
+    }
+}

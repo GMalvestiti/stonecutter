@@ -2,10 +2,11 @@ plugins {
     id("build.common")
     id("neoforge.mutex")
     id("net.neoforged.moddev") version "2.0.141"
+    id("me.modmuss50.mod-publish-plugin") version "2.1.1"
 }
 
-version = "${property("mod.version")}+${sc.current.version}"
-base.archivesName = "${property("mod.id") as String}-neoforge"
+version = "${property("mod.version")}-${sc.current.version}-neoforge"
+base.archivesName = property("mod.id") as String
 
 sourceSets.main {
     resources.srcDir("src/main/resources")
@@ -96,7 +97,7 @@ dependencies {
 
 tasks {
     register<Copy>("buildAndCollect") {
-        group = "build"
+        group = "custom"
         description = "Builds mod jars and copies results to `build/libs/{mod version}/`"
 
         dependsOn(build)

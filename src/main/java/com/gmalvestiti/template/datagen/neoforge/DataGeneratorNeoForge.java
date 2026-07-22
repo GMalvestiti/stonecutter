@@ -18,8 +18,8 @@ import com.gmalvestiti.template.datagen.neoforge.provider.EntityTypeTagProviderN
 import java.util.concurrent.CompletableFuture;
 
 //? if <1.21.4 {
-//@EventBusSubscriber(modid = TemplateCommon.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
-//?} else
+/^@EventBusSubscriber(modid = TemplateCommon.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+^///?} else
 @EventBusSubscriber(modid = TemplateCommon.MOD_ID)
 public class DataGeneratorNeoForge {
 
