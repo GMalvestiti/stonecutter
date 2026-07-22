@@ -1,9 +1,9 @@
-package com.gmalvestiti.template.datagen.neoforge.provider;
+package com.gmalvestiti.minecraft.template.datagen.neoforge.provider;
 
 //? if neoforge {
 /*import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
-import com.gmalvestiti.template.TemplateCommon;
+import com.gmalvestiti.minecraft.template.TemplateCommon;
 
 public class EnglishLanguageProviderNeoForge extends LanguageProvider {
 

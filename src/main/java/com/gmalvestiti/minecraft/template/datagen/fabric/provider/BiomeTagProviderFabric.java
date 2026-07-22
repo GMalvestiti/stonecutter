@@ -1,4 +1,4 @@
-package com.gmalvestiti.template.datagen.fabric.provider;
+package com.gmalvestiti.minecraft.template.datagen.fabric.provider;
 
 //? if fabric {
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;

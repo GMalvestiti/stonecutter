@@ -82,12 +82,15 @@ signing.secretKeyRingFile=C:/Users/<user>/.../secring.gpg
 
 ## Execution & Publication Commands
 
-Run the continuous task validation pipeline inside your project terminal environment:
+Run the following commands in your PowerShell terminal to test and publish your artifacts to Maven Central:
 
 ```powershell
 # Step 1: Clean build directories and verify cryptographic signing steps
 ./gradlew clean signMavenPublication
 
-# Step 2: Publish and trigger automated release on Sonatype Central Portal
+# Step 2: Publish artifacts to your local Maven repository for testing (check `~/.m2/repository` for output)
+./gradlew publishToMavenLocal
+
+# Step 3: Publish and trigger automated release on Sonatype Central Portal
 ./gradlew publishToMavenCentral
 ```

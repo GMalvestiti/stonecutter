@@ -1,11 +1,11 @@
-package com.gmalvestiti.template;
+package com.gmalvestiti.minecraft.template;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
-import static com.gmalvestiti.template.config.ConfigManager.CONFIG;
+import static com.gmalvestiti.minecraft.template.config.ConfigManager.CONFIG;
 
 public class TemplateCommon {
 

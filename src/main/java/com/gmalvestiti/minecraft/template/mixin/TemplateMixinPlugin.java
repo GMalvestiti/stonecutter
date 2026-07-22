@@ -1,7 +1,7 @@
-package com.gmalvestiti.template.mixin;
+package com.gmalvestiti.minecraft.template.mixin;
 
-import com.gmalvestiti.template.TemplateCommon;
-import com.gmalvestiti.template.config.ConfigManager;
+import com.gmalvestiti.minecraft.template.TemplateCommon;
+import com.gmalvestiti.minecraft.template.config.ConfigManager;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import static com.gmalvestiti.template.config.ConfigManager.CONFIG;
+import static com.gmalvestiti.minecraft.template.config.ConfigManager.CONFIG;
 
 public class TemplateMixinPlugin implements IMixinConfigPlugin {
 

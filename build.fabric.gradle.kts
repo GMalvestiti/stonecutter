@@ -6,8 +6,8 @@ plugins {
 }
 
 // DO NOT set group = ...!
-version = "${property("mod.version")}-${sc.current.version}-fabric"
-base.archivesName = property("mod.id") as String
+version = "${property("mod.version")}-${sc.current.version}"
+base.archivesName = "${property("mod.id")}-fabric"
 
 sourceSets.main {
     resources.exclude("**/.cache")

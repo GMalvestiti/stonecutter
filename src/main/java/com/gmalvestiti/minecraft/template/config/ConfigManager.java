@@ -1,10 +1,10 @@
-package com.gmalvestiti.template.config;
+package com.gmalvestiti.minecraft.template.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
-import com.gmalvestiti.template.TemplateCommon;
-import com.gmalvestiti.template.Platform;
+import com.gmalvestiti.minecraft.template.TemplateCommon;
+import com.gmalvestiti.minecraft.template.Platform;
 
 import java.io.IOException;
 import java.nio.file.Files;

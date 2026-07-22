@@ -1,4 +1,4 @@
-package com.gmalvestiti.template;
+package com.gmalvestiti.minecraft.template;
 
 //? if neoforge {
 /*import net.neoforged.bus.api.IEventBus;

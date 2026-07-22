@@ -33,7 +33,7 @@ afterEvaluate {
 
         coordinates(
             prop("mod.group"),
-            prop("mod.id"),
+            project.base.archivesName.get(),
             project.version as String
         )
 

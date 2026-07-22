@@ -17,10 +17,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.gmalvestiti.template.TemplateFabric"
+      "com.gmalvestiti.minecraft.template.TemplateFabric"
     ],
     "fabric-datagen": [
-      "com.gmalvestiti.template.datagen.fabric.DataGeneratorFabric"
+      "com.gmalvestiti.minecraft.template.datagen.fabric.DataGeneratorFabric"
     ]
   },
   "mixins": [

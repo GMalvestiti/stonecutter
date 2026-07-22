@@ -5,8 +5,8 @@ plugins {
     id("me.modmuss50.mod-publish-plugin") version "2.1.1"
 }
 
-version = "${property("mod.version")}-${sc.current.version}-neoforge"
-base.archivesName = property("mod.id") as String
+version = "${property("mod.version")}-${sc.current.version}"
+base.archivesName = "${property("mod.id")}-neoforge"
 
 sourceSets.main {
     resources.srcDir("src/main/resources")

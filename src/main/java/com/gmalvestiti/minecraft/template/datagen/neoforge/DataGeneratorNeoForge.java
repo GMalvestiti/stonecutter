@@ -1,4 +1,4 @@
-package com.gmalvestiti.template.datagen.neoforge;
+package com.gmalvestiti.minecraft.template.datagen.neoforge;
 
 //? if neoforge {
 /*import net.minecraft.core.HolderLookup;
@@ -10,10 +10,10 @@ import net.neoforged.fml.common.EventBusSubscriber;
 /^import net.neoforged.neoforge.common.data.ExistingFileHelper;
 ^///?}
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import com.gmalvestiti.template.TemplateCommon;
-import com.gmalvestiti.template.datagen.neoforge.provider.BiomeTagProviderNeoForge;
-import com.gmalvestiti.template.datagen.neoforge.provider.EnglishLanguageProviderNeoForge;
-import com.gmalvestiti.template.datagen.neoforge.provider.EntityTypeTagProviderNeoForge;
+import com.gmalvestiti.minecraft.template.TemplateCommon;
+import com.gmalvestiti.minecraft.template.datagen.neoforge.provider.BiomeTagProviderNeoForge;
+import com.gmalvestiti.minecraft.template.datagen.neoforge.provider.EnglishLanguageProviderNeoForge;
+import com.gmalvestiti.minecraft.template.datagen.neoforge.provider.EntityTypeTagProviderNeoForge;
 
 import java.util.concurrent.CompletableFuture;
 

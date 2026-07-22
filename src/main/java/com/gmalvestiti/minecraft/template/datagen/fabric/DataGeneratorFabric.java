@@ -1,12 +1,12 @@
-package com.gmalvestiti.template.datagen.fabric;
+package com.gmalvestiti.minecraft.template.datagen.fabric;
 
 //? if fabric {
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import com.gmalvestiti.template.TemplateCommon;
-import com.gmalvestiti.template.datagen.fabric.provider.BiomeTagProviderFabric;
-import com.gmalvestiti.template.datagen.fabric.provider.EnglishLanguageProviderFabric;
-import com.gmalvestiti.template.datagen.fabric.provider.EntityTypeTagProviderFabric;
+import com.gmalvestiti.minecraft.template.TemplateCommon;
+import com.gmalvestiti.minecraft.template.datagen.fabric.provider.BiomeTagProviderFabric;
+import com.gmalvestiti.minecraft.template.datagen.fabric.provider.EnglishLanguageProviderFabric;
+import com.gmalvestiti.minecraft.template.datagen.fabric.provider.EntityTypeTagProviderFabric;
 
 public class DataGeneratorFabric implements DataGeneratorEntrypoint {
 

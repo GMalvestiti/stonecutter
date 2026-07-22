@@ -1,4 +1,4 @@
-package com.gmalvestiti.template.datagen.neoforge.provider;
+package com.gmalvestiti.minecraft.template.datagen.neoforge.provider;
 
 //? if neoforge {
 /*import net.minecraft.core.HolderLookup;
@@ -8,7 +8,7 @@ import net.minecraft.tags.BiomeTags;
 //? if <1.21.4 {
 /^import net.neoforged.neoforge.common.data.ExistingFileHelper;
 ^///?}
-import com.gmalvestiti.template.TemplateCommon;
+import com.gmalvestiti.minecraft.template.TemplateCommon;
 import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;

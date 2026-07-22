@@ -1,4 +1,4 @@
-package com.gmalvestiti.template.mixin;
+package com.gmalvestiti.minecraft.template.mixin;
 
 import net.minecraft.server.level.ServerLevel;
 

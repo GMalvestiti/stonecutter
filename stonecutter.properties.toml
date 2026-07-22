@@ -1,7 +1,7 @@
 # See https://stonecutter.kikugie.dev/wiki/config/properties#centralized-properties
 mod.id="template"
 mod.name="Template"
-mod.group="com.gmalvestiti"
+mod.group="com.gmalvestiti.minecraft"
 mod.version="1.0.0"
 
 loomx.loom_version="1.17-SNAPSHOT"
