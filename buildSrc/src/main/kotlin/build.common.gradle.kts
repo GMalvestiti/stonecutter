@@ -50,6 +50,7 @@ afterEvaluate {
                     distribution.set("${prop("mod.contact_sources")}/blob/main/LICENSE")
                 }
             }
+
             developers {
                 developer {
                     id.set(prop("mod.author"))
@@ -57,6 +58,7 @@ afterEvaluate {
                     url.set("https://github.com/${prop("mod.author")}")
                 }
             }
+
             scm {
                 url.set(prop("mod.contact_sources"))
                 connection.set("scm:git:git://github.com/${prop("mod.author")}/${prop("mod.id")}.git")

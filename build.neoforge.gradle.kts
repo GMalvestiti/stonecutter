@@ -53,18 +53,11 @@ neoForge {
             client()
             programArgument("--username=Riser876")
             programArgument("--uuid=13957e2e-2731-4479-8a6d-d42f89f8d756")
-            systemProperty("neoforge.enabledGameTestNamespaces", property("mod.id") as String)
         }
 
         register("server") {
             server()
             programArgument("--nogui")
-            systemProperty("neoforge.enabledGameTestNamespaces", property("mod.id") as String)
-        }
-
-        register("gameTestServer") {
-            type = "gameTestServer"
-            systemProperty("neoforge.enabledGameTestNamespaces", property("mod.id") as String)
         }
 
         register("data") {
