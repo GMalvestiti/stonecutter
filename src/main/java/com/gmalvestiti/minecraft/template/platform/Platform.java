@@ -1,4 +1,4 @@
-package com.gmalvestiti.minecraft.template;
+package com.gmalvestiti.minecraft.template.platform;
 
 import java.nio.file.Path;
 

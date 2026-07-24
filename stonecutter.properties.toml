@@ -16,6 +16,10 @@ mod.contact_sources="https://github.com/GMalvestiti/template"
 mod.contact_issues="https://github.com/GMalvestiti/template/issues"
 mod.license="MIT"
 
+dev.debug=false
+dev.javadoc=false
+dev.snapshot=true
+
 ["1.21"]
 
 [fabric."1.21"]

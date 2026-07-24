@@ -6,17 +6,24 @@ plugins {
 }
 
 // DO NOT set group = ...!
-version = "${property("mod.version")}-${sc.current.version}"
+version = "${sc.current.version}-${property("mod.version")}"
+
+if (property("dev.snapshot").toString().toBoolean()) {
+    version = "$version-SNAPSHOT"
+}
+
 base.archivesName = "${property("mod.id")}-fabric"
 
 sourceSets.main {
     resources.exclude("**/.cache")
 }
 
-val shadowGroup: String = property("mod.group") as String
+val shadowGroup: String = "${property("mod.group")}.shadow"
 
 configurations {
-    shadow
+    named("implementation") {
+        extendsFrom(configurations.shadow.get())
+    }
 }
 
 val requiredJava: JavaVersion = when {
@@ -75,7 +82,6 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
-    implementation("com.github.ben-manes.caffeine:caffeine:${property("deps.caffeine")}")
     shadow("com.github.ben-manes.caffeine:caffeine:${property("deps.caffeine")}")
 }
 
@@ -115,9 +121,9 @@ tasks {
 
         configurations = listOf(project.configurations.shadow.get())
 
-        relocate("com.github.benmanes.caffeine", "${shadowGroup}.shadow.caffeine")
-        relocate("com.google.errorprone", "${shadowGroup}.shadow.errorprone")
-        relocate("org.jspecify", "${shadowGroup}.shadow.jspecify")
+        relocate("com.github.benmanes.caffeine", "${shadowGroup}.caffeine")
+        relocate("com.google.errorprone", "${shadowGroup}.errorprone")
+        relocate("org.jspecify", "${shadowGroup}.jspecify")
 
         mergeServiceFiles()
         addMultiReleaseAttribute.set(false)

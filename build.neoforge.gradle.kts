@@ -1,11 +1,16 @@
 plugins {
     id("build.common")
     id("neoforge.mutex")
-    id("net.neoforged.moddev") version "2.0.141"
+    id("net.neoforged.moddev") version "2.0.142"
     id("me.modmuss50.mod-publish-plugin") version "2.1.1"
 }
 
-version = "${property("mod.version")}-${sc.current.version}"
+version = "${sc.current.version}-${property("mod.version")}"
+
+if (property("dev.snapshot").toString().toBoolean()) {
+    version = "$version-SNAPSHOT"
+}
+
 base.archivesName = "${property("mod.id")}-neoforge"
 
 sourceSets.main {

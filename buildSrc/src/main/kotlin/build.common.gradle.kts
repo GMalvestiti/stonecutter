@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.Checksum
+import com.vanniktech.maven.publish.JavadocJar
 
 plugins {
     java
@@ -36,6 +37,12 @@ afterEvaluate {
             project.base.archivesName.get(),
             project.version as String
         )
+
+        if (!prop("dev.javadoc").toBoolean()) {
+            configureBasedOnAppliedPlugins(
+                javadocJar = JavadocJar.Empty()
+            )
+        }
 
         pom {
             name.set(prop("mod.name"))

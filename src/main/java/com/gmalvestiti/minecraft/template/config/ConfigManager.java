@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.gmalvestiti.minecraft.template.TemplateCommon;
-import com.gmalvestiti.minecraft.template.Platform;
+import com.gmalvestiti.minecraft.template.platform.Platform;
 
 import java.io.IOException;
 import java.nio.file.Files;

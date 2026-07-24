@@ -17,7 +17,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.gmalvestiti.minecraft.template.TemplateFabric"
+        "com.gmalvestiti.minecraft.template.platform.fabric.FabricEntrypoint"
     ],
     "fabric-datagen": [
       "com.gmalvestiti.minecraft.template.datagen.fabric.DataGeneratorFabric"
