@@ -19,12 +19,26 @@ repositories {
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
 }
 
-tasks.withType<JavaCompile>().configureEach {
-    options.encoding = "UTF-8"
-}
-
 fun prop(property: String): String {
     return project.property(property) as String
+}
+
+tasks {
+    withType<JavaCompile>().configureEach {
+        options.encoding = "UTF-8"
+    }
+
+    register<Copy>("installGitHooks") {
+        group = "help"
+        description = "Installs git hooks for the project"
+
+        from(File(rootProject.rootDir, "scripts/pre-commit"))
+        into(File(rootProject.rootDir, ".git/hooks"))
+
+        filePermissions {
+            unix("rwxr-xr-x")
+        }
+    }
 }
 
 afterEvaluate {
