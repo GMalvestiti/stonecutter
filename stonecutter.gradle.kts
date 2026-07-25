@@ -22,6 +22,7 @@ stonecutter parameters {
     swaps["mod_version"] = "\"${properties.get<String>("mod.version")}\";"
     swaps["minecraft"] = "\"${node.metadata.version}\";"
     dependencies["fapi"] = properties.getOrNull<String>("deps.fabric_api") ?: "0"
+    constants["debug"] = properties.get<String>("dev.debug").toBoolean()
 
     replacements {
         string(current.parsed >= "1.21.11") {
