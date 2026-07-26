@@ -25,30 +25,15 @@ fun prop(property: String): String {
 }
 
 fun getChangelog(): String {
-    val changelogFile = rootProject.file("CHANGELOG.md")
-
-    val lines = changelogFile.readLines()
-    val builder = StringBuilder()
-
-    var insideTargetSection = false
     val targetHeader = "# ${prop("mod.version")}"
 
-    for (line in lines) {
-        if (insideTargetSection && line.startsWith("# ")) {
-            break
-        }
-
-        if (line.trim().contains(targetHeader, true)) {
-            insideTargetSection = true
-            continue
-        }
-
-        if (insideTargetSection) {
-            builder.append(line).append("\n")
-        }
+    return rootProject.file("CHANGELOG.md").useLines { lines ->
+        lines.dropWhile { !it.trim().contains(targetHeader, ignoreCase = true) }
+            .drop(1)
+            .takeWhile { !it.trim().startsWith("# ") }
+            .joinToString("\n")
+            .trim()
     }
-
-    return builder.toString().trim()
 }
 
 tasks {
