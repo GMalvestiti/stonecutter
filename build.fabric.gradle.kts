@@ -162,3 +162,18 @@ tasks {
         exclude("META-INF/neoforge.mods.toml")
     }
 }
+
+publishMods {
+    file.set(loomx.modJar.flatMap { it.archiveFile })
+    displayName.set("${property("mod.name")} Fabric ${property("mod.version")} for ${property("publish.start")}")
+    modLoaders.add("fabric")
+
+    modrinth {
+        requires("fabric-api")
+    }
+
+    curseforge {
+        javaVersions.add(requiredJava)
+        requires("fabric-api")
+    }
+}

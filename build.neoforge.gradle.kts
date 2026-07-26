@@ -143,3 +143,13 @@ tasks {
         dependsOn("stonecutterGenerate")
     }
 }
+
+publishMods {
+    file.set(tasks.jar.flatMap { it.archiveFile })
+    displayName.set("${property("mod.name")} NeoForge ${property("mod.version")} for ${property("publish.start")}")
+    modLoaders.add("neoforge")
+
+    curseforge {
+        javaVersions.add(requiredJava)
+    }
+}

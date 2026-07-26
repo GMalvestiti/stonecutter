@@ -1,5 +1,6 @@
 import com.vanniktech.maven.publish.Checksum
 import com.vanniktech.maven.publish.JavadocJar
+import me.modmuss50.mpp.ReleaseType
 
 plugins {
     java
@@ -36,6 +37,12 @@ fun getChangelog(): String {
     }
 }
 
+fun getType(): ReleaseType = when (prop("publish.type").trim().lowercase()) {
+    "alpha" -> ReleaseType.ALPHA
+    "beta" -> ReleaseType.BETA
+    else -> ReleaseType.STABLE
+}
+
 tasks {
     withType<JavaCompile>().configureEach {
         options.encoding = "UTF-8"
@@ -62,7 +69,7 @@ afterEvaluate {
         coordinates(
             prop("mod.group"),
             project.base.archivesName.get(),
-            project.version as String
+            project.version.toString()
         )
 
         if (!prop("dev.javadoc").toBoolean()) {
@@ -102,6 +109,42 @@ afterEvaluate {
 
         checksums(Checksum.MD5, Checksum.SHA1, Checksum.SHA256, Checksum.SHA512)
         excludeSignatureChecksums(false)
+    }
+
+    publishMods {
+        version.set(project.version.toString())
+        changelog.set(getChangelog())
+        type.set(getType())
+
+        modrinth {
+            accessToken.set(providers.gradleProperty("modrinth.token"))
+            projectId.set(prop("publish.modrinth_id"))
+
+            minecraftVersionRange {
+                start.set(prop("publish.start"))
+                end.set(prop("publish.end"))
+            }
+
+            environment.set(CLIENT_AND_SERVER)
+            projectDescription.set(providers.fileContents(layout.projectDirectory.file("README.md")).asText)
+        }
+
+        curseforge {
+            accessToken.set(providers.gradleProperty("curseforge.token"))
+            projectId.set(prop("publish.curseforge_id"))
+
+            minecraftVersionRange {
+                start.set(prop("publish.start"))
+                end.set(prop("publish.end"))
+            }
+
+            client.set(prop("publish.curseforge_client").toBoolean())
+            server.set(prop("publish.curseforge_server").toBoolean())
+            projectSlug.set(prop("publish.curseforge_slug"))
+            changelogType.set("markdown")
+        }
+
+        dryRun.set(prop("publish.dry_run").toBoolean())
     }
 }
 

@@ -20,19 +20,34 @@ dev.debug=false
 dev.javadoc=false
 dev.snapshot=true
 
+publish.type="beta"
+publish.modrinth_id="template"
+publish.curseforge_id="1234567"
+publish.curseforge_slug="template"
+publish.curseforge_client=true
+publish.curseforge_server=true
+publish.dry_run=true
+
+
 ["1.21"]
+
+publish.start="1.21"
+publish.end="1.21.11"
 
 [fabric."1.21"]
 # Mod compatibility range in fabric.mod.json/neoforge.mods.toml
-mod.mc_compat=">=1.21 <=1.21.1"
+mod.mc_compat=">=1.21 <=1.21.11"
 deps.fabric_api="0.102.0+1.21"
 
 [neoforge."1.21"]
-mod.mc_compat="[1.21, 1.21.1]"
+mod.mc_compat="[1.21, 1.21.11]"
 deps.neoforge_loader="21.0.167"
 
 
 ["26.1"]
+
+publish.start="26.1"
+publish.end="latest"
 
 [fabric."26.1"]
 mod.mc_compat=">=26.1"
