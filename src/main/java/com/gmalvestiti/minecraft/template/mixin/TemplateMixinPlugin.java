@@ -1,7 +1,7 @@
 package com.gmalvestiti.minecraft.template.mixin;
 
 import com.gmalvestiti.minecraft.template.TemplateCommon;
-import com.gmalvestiti.minecraft.template.config.ConfigManager;
+import com.gmalvestiti.minecraft.template.config.Config;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import static com.gmalvestiti.minecraft.template.config.ConfigManager.CONFIG;
+import static com.gmalvestiti.minecraft.template.TemplateCommon.CONFIG;
 
 public class TemplateMixinPlugin implements IMixinConfigPlugin {
 
@@ -21,8 +21,7 @@ public class TemplateMixinPlugin implements IMixinConfigPlugin {
         try {
             this.mixinPackage = mixinPackage;
 
-            ConfigManager.loadConfig();
-            ConfigManager.validateConfig();
+            CONFIG = new Config();
             TemplateCommon.info("Configuration loaded.");
         } catch (Exception e) {
             TemplateCommon.error("Failed to load configuration. Check your template.json config file.", e);

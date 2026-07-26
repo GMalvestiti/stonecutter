@@ -1,32 +1,22 @@
 package com.gmalvestiti.minecraft.template.platform;
 
+//? if fabric {
+import net.fabricmc.loader.api.FabricLoader;
+//?} elif neoforge {
+/*import net.neoforged.fml.loading.FMLPaths;
+*///?}
+
 import java.nio.file.Path;
 
-public sealed interface Platform {
-
-    Platform INSTANCE =
-        /*? if fabric{*/new FabricPlatform();
-        /*?} elif neoforge *///new NeoForgePlatform();
-
-    Path getConfigDir();
+public final class Platform {
 
     //? if fabric {
-    final class FabricPlatform implements Platform {
-
-        private final net.fabricmc.loader.api.FabricLoader loader = net.fabricmc.loader.api.FabricLoader.getInstance();
-
-        @Override
-        public Path getConfigDir() {
-            return loader.getConfigDir();
-        }
+    public Path getConfigDir() {
+        return FabricLoader.getInstance().getConfigDir();
     }
     //?} elif neoforge {
-    /*final class NeoForgePlatform implements Platform {
-
-        @Override
-        public Path getConfigDir() {
-            return net.neoforged.fml.loading.FMLPaths.CONFIGDIR.get();
-        }
+    /*public Path getConfigDir() {
+        return FMLPaths.CONFIGDIR.get();
     }
     *///?}
 }

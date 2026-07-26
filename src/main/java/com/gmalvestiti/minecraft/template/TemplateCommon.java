@@ -1,16 +1,17 @@
 package com.gmalvestiti.minecraft.template;
 
+import com.gmalvestiti.minecraft.template.config.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
-import static com.gmalvestiti.minecraft.template.config.ConfigManager.CONFIG;
-
 public class TemplateCommon {
 
     public static final String MOD_ID = /*$ mod_id*/ "template";
     public static final Logger LOGGER = LoggerFactory.getLogger( TemplateCommon.MOD_ID);
+
+    public static Config CONFIG;
 
     public static void init() {
         if (Objects.nonNull(CONFIG) && CONFIG.ENABLED) {
