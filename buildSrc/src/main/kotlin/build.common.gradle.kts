@@ -5,6 +5,7 @@ plugins {
     java
     idea
     id("com.vanniktech.maven.publish")
+    id("me.modmuss50.mod-publish-plugin")
 }
 
 repositories {
@@ -21,6 +22,33 @@ repositories {
 
 fun prop(property: String): String {
     return project.property(property) as String
+}
+
+fun getChangelog(): String {
+    val changelogFile = rootProject.file("CHANGELOG.md")
+
+    val lines = changelogFile.readLines()
+    val builder = StringBuilder()
+
+    var insideTargetSection = false
+    val targetHeader = "# ${prop("mod.version")}"
+
+    for (line in lines) {
+        if (insideTargetSection && line.startsWith("# ")) {
+            break
+        }
+
+        if (line.trim().contains(targetHeader, true)) {
+            insideTargetSection = true
+            continue
+        }
+
+        if (insideTargetSection) {
+            builder.append(line).append("\n")
+        }
+    }
+
+    return builder.toString().trim()
 }
 
 tasks {

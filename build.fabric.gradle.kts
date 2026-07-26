@@ -2,7 +2,6 @@ plugins {
     id("build.common")
     id("dev.kikugie.loom-back-compat")
     id("com.gradleup.shadow") version "9.5.1"
-    id("me.modmuss50.mod-publish-plugin") version "2.1.1"
 }
 
 // DO NOT set group = ...!
@@ -128,7 +127,7 @@ tasks {
         mergeServiceFiles()
         addMultiReleaseAttribute.set(false)
 
-        exclude("META-INF/LICENSE", "META-INF/maven/**", "META-INF/versions/**/OSGI-INF/**")
+        exclude("META-INF/LICENSE.md", "META-INF/maven/**", "META-INF/versions/**/OSGI-INF/**")
     }
 
     processResources {
@@ -158,7 +157,7 @@ tasks {
         val mixinJava = "JAVA_${requiredJava.majorVersion}"
         filesMatching("*.mixins.json") { expand("java" to mixinJava) }
 
-        from(rootProject.file("LICENSE")) { into("") }
+        from(rootProject.file("LICENSE.md")) { into("") }
 
         exclude("META-INF/neoforge.mods.toml")
     }

@@ -2,7 +2,6 @@ plugins {
     id("build.common")
     id("neoforge.mutex")
     id("net.neoforged.moddev") version "2.0.142"
-    id("me.modmuss50.mod-publish-plugin") version "2.1.1"
 }
 
 version = "${sc.current.version}-${property("mod.version")}"
@@ -135,7 +134,7 @@ tasks {
         val mixinJava = "JAVA_${requiredJava.majorVersion}"
         filesMatching("*.mixins.json") { expand("java" to mixinJava) }
 
-        from(rootProject.file("LICENSE")) { into("") }
+        from(rootProject.file("LICENSE.md")) { into("") }
 
         exclude("fabric.mod.json", "*.ct", "*.classtweaker")
     }
