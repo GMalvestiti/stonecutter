@@ -37,7 +37,7 @@ fun getChangelog(): String {
     }
 }
 
-fun getType(): ReleaseType = when (prop("publish.type").trim().lowercase()) {
+fun getReleaseType(): ReleaseType = when (prop("publish.type").trim().lowercase()) {
     "alpha" -> ReleaseType.ALPHA
     "beta" -> ReleaseType.BETA
     else -> ReleaseType.STABLE
@@ -114,7 +114,7 @@ afterEvaluate {
     publishMods {
         version.set(project.version.toString())
         changelog.set(getChangelog())
-        type.set(getType())
+        type.set(getReleaseType())
 
         modrinth {
             accessToken.set(providers.gradleProperty("modrinth.token"))
