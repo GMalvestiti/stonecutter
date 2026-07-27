@@ -11,12 +11,28 @@ import java.nio.file.Path;
 public final class Platform {
 
     //? if fabric {
-    public Path getConfigDir() {
+    public static Path getConfigDir() {
         return FabricLoader.getInstance().getConfigDir();
     }
+
+    public static boolean isFabric() {
+        return true;
+    }
+
+    public static boolean isNeoForge() {
+        return false;
+    }
     //?} elif neoforge {
-    /*public Path getConfigDir() {
+    /*public static Path getConfigDir() {
         return FMLPaths.CONFIGDIR.get();
+    }
+
+    public static boolean isFabric() {
+        return true;
+    }
+
+    public static boolean isNeoForge() {
+        return false;
     }
     *///?}
 }

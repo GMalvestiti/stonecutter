@@ -46,5 +46,5 @@ jobs:
           prerelease: false
           files: |
             build/libs/${{inputs.version_release}}/*.jar
-            LICENSE
+            LICENSE.md
           fail_on_unmatched_files: true

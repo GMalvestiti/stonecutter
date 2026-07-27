@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.configureEach
+
 plugins {
     id("build.common")
     id("dev.kikugie.loom-back-compat")
@@ -68,8 +70,8 @@ loom {
     }
 
     runConfigs["client"].apply {
-        programArguments.add("--username=Riser876")
-        programArguments.add("--uuid=13957e2e-2731-4479-8a6d-d42f89f8d756")
+        programArguments.add("--username=${project.property("dev.username")}")
+        programArguments.add("--uuid=${project.property("dev.uuid")}")
     }
 }
 
@@ -87,6 +89,8 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("deps.fabric_api")}")
 
     shadow("com.github.ben-manes.caffeine:caffeine:${property("deps.caffeine")}")
+
+    testImplementation("net.fabricmc:fabric-loader-junit:${property("deps.fabric_loader")}")
 }
 
 tasks {
@@ -163,6 +167,10 @@ tasks {
         from(rootProject.file("LICENSE.md")) { into("") }
 
         exclude("META-INF/neoforge.mods.toml")
+    }
+
+    test {
+        useJUnitPlatform()
     }
 }
 

@@ -59,6 +59,14 @@ tasks {
             unix("rwxr-xr-x")
         }
     }
+
+    withType<Test>().configureEach {
+        workingDir = project.layout.projectDirectory.dir("runTest").asFile
+
+        doFirst {
+            workingDir.mkdirs()
+        }
+    }
 }
 
 afterEvaluate {

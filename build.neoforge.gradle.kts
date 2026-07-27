@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.configureEach
+
 plugins {
     id("build.common")
     id("neoforge.mutex")
@@ -40,6 +42,8 @@ java {
 neoForge {
     version = property("deps.neoforge_loader") as String
 
+    validateAccessTransformers = true
+
     mods {
         register("${property("mod.id")}") {
             sourceSet(sourceSets.main.get())
@@ -55,8 +59,8 @@ neoForge {
 
         register("client") {
             client()
-            programArgument("--username=Riser876")
-            programArgument("--uuid=13957e2e-2731-4479-8a6d-d42f89f8d756")
+            programArgument("--username=${property("dev.username")}")
+            programArgument("--uuid=${property("dev.uuid")}")
         }
 
         register("server") {
@@ -79,6 +83,11 @@ neoForge {
             )
         }
     }
+
+    unitTest {
+        enable()
+        testedMod.set(mods.getByName("${property("mod.id")}"))
+    }
 }
 
 dependencies {
@@ -90,6 +99,9 @@ dependencies {
     if (sc.current.parsed < "1.21.9") {
         "additionalRuntimeClasspath"("com.github.ben-manes.caffeine:caffeine:${property("deps.caffeine")}")
     }
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks {
@@ -141,6 +153,10 @@ tasks {
 
     named("createMinecraftArtifacts") {
         dependsOn("stonecutterGenerate")
+    }
+
+    test {
+        useJUnitPlatform()
     }
 }
 
