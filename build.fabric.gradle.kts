@@ -90,7 +90,7 @@ dependencies {
 }
 
 tasks {
-    register<Sync>("buildAndCollect") {
+    register<Copy>("buildAndCollect") {
         group = "custom"
         description = "Builds mod jars and copies results to `build/libs/{mod version}/`"
 
