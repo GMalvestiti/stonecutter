@@ -17,12 +17,17 @@ sourceSets.main {
     resources.exclude("**/.cache")
 }
 
-val shadowGroup: String = "${property("mod.group")}.shadow"
+val shadowGroup: String = "${property("mod.group")}.${property("mod.id")}.shadow"
 
 configurations {
     named("implementation") {
         extendsFrom(configurations.shadow.get())
     }
+}
+
+val distributionJar: Provider<RegularFile> = when {
+    sc.current.parsed < "26.1" -> tasks.named<net.fabricmc.loom.task.RemapJarTask>("remapJar").flatMap { it.archiveFile }
+    else -> tasks.shadowJar.flatMap { it.archiveFile }
 }
 
 val requiredJava: JavaVersion = when {
@@ -85,7 +90,7 @@ dependencies {
 }
 
 tasks {
-    register<Copy>("buildAndCollect") {
+    register<Sync>("buildAndCollect") {
         group = "custom"
         description = "Builds mod jars and copies results to `build/libs/{mod version}/`"
 
@@ -93,9 +98,7 @@ tasks {
 
         inputs.property("version", project.property("mod.version"))
 
-        from(
-            loomx.modJar.flatMap { it.archiveFile }
-        )
+        from(distributionJar)
 
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
     }
@@ -127,7 +130,7 @@ tasks {
         mergeServiceFiles()
         addMultiReleaseAttribute.set(false)
 
-        exclude("META-INF/LICENSE.md", "META-INF/maven/**", "META-INF/versions/**/OSGI-INF/**")
+        exclude("META-INF/LICENSE", "META-INF/maven/**", "META-INF/versions/**/OSGI-INF/**")
     }
 
     processResources {
@@ -164,7 +167,7 @@ tasks {
 }
 
 publishMods {
-    file.set(loomx.modJar.flatMap { it.archiveFile })
+    file.set(distributionJar)
     displayName.set("${property("mod.name")} Fabric ${property("mod.version")} for ${property("publish.start")}")
     modLoaders.add("fabric")
 
