@@ -24,6 +24,7 @@ dev.uuid="13957e2e-2731-4479-8a6d-d42f89f8d756"
 
 publish.type="beta"
 publish.modrinth_id="template"
+publish.modrinth_changelog="1.21"
 publish.curseforge_id="1234567"
 publish.curseforge_slug="template"
 publish.curseforge_client=true

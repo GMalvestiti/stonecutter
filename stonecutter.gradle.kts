@@ -38,15 +38,24 @@ stonecutter parameters {
 }
 
 tasks {
-    register("generateResources") {
+    register("publishMaven") {
         group = "custom"
-        description = "Run datagen for all versions"
-        dependsOn(stonecutter.tasks.named("runDatagen") {
-            metadata.project.endsWith("fabric")
-        })
-        dependsOn(stonecutter.tasks.named("runData") {
-            metadata.project.endsWith("neoforge")
-        })
+        description = "Publish all versions to the Maven repository"
+
+        val isDryRun = project.findProperty("publish.dry_run")?.toString()?.toBoolean() ?: true
+
+        if (isDryRun) {
+            dependsOn(stonecutter.tasks.named("publishToMavenLocal"))
+        } else {
+            dependsOn(stonecutter.tasks.named("publishToMavenCentral"))
+        }
+    }
+
+    register("publishMod") {
+        group = "custom"
+        description = "Publish all versions to the mod repositories"
+
+        dependsOn(stonecutter.tasks.named("publishMods"))
     }
 
     register("runActiveClient") {
@@ -59,5 +68,16 @@ tasks {
         group = "custom"
         description = "Run server of the active Stonecutter version"
         dependsOn(stonecutter.current!!.project + ":runServer")
+    }
+
+    register("generateResources") {
+        group = "custom"
+        description = "Run datagen for all versions"
+        dependsOn(stonecutter.tasks.named("runDatagen") {
+            metadata.project.endsWith("fabric")
+        })
+        dependsOn(stonecutter.tasks.named("runData") {
+            metadata.project.endsWith("neoforge")
+        })
     }
 }

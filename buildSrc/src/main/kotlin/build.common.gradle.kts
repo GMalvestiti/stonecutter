@@ -25,7 +25,13 @@ fun prop(property: String): String {
     return project.property(property) as String
 }
 
-fun getChangelog(): String {
+fun getChangelog(isModrinth: Boolean): String {
+    if (isModrinth
+        && prop("publish.modrinth_changelog").isNotBlank()
+        && (prop("publish.start") != prop("publish.modrinth_changelog"))) {
+        return ""
+    }
+
     val targetHeader = "# ${prop("mod.version")}"
 
     return rootProject.file("CHANGELOG.md").useLines { lines ->
@@ -121,10 +127,10 @@ afterEvaluate {
 
     publishMods {
         version.set(project.version.toString())
-        changelog.set(getChangelog())
         type.set(getReleaseType())
 
         modrinth {
+            changelog.set(getChangelog(true))
             accessToken.set(providers.gradleProperty("modrinth.token"))
             projectId.set(prop("publish.modrinth_id"))
 
@@ -138,6 +144,7 @@ afterEvaluate {
         }
 
         curseforge {
+            changelog.set(getChangelog(false))
             accessToken.set(providers.gradleProperty("curseforge.token"))
             projectId.set(prop("publish.curseforge_id"))
 
