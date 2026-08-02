@@ -5,6 +5,7 @@ import me.modmuss50.mpp.ReleaseType
 plugins {
     java
     idea
+    jacoco
     id("com.vanniktech.maven.publish")
     id("me.modmuss50.mod-publish-plugin")
 }
@@ -49,11 +50,15 @@ fun getReleaseType(): ReleaseType = when (prop("publish.type").trim().lowercase(
     else -> ReleaseType.STABLE
 }
 
-tasks {
-    withType<JavaCompile>().configureEach {
-        options.encoding = "UTF-8"
-    }
+val rootPackage = "${prop("mod.group")}.${prop("mod.id")}"
 
+val excludedPackages = listOf(
+    "${rootPackage}.datagen.*",
+    "${rootPackage}.platform.fabric.*",
+    "${rootPackage}.platform.neoforge.*"
+)
+
+tasks {
     register<Copy>("installGitHooks") {
         group = "help"
         description = "Installs git hooks for the project"
@@ -66,11 +71,54 @@ tasks {
         }
     }
 
-    withType<Test>().configureEach {
+    withType<JavaCompile>().configureEach {
+        options.encoding = "UTF-8"
+    }
+
+    test {
         workingDir = project.layout.projectDirectory.dir("runTest").asFile
+
+        useJUnitPlatform()
 
         doFirst {
             workingDir.mkdirs()
+        }
+
+        finalizedBy(jacocoTestReport)
+    }
+
+    jacocoTestReport {
+        dependsOn(test)
+
+        classDirectories.setFrom(classDirectories.files.map {
+            fileTree(it).matching {
+                exclude(excludedPackages.map { pkg -> "**/$pkg"
+                    .replace('.', '/')
+                    .replace("/*", "/**")
+                })
+            }
+        })
+
+        reports {
+            xml.required.set(true)
+            csv.required.set(false)
+            html.required.set(true)
+        }
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                element = "CLASS"
+
+                excludes = excludedPackages
+
+                limit {
+                    counter = "BRANCH"
+                    value = "COVEREDRATIO"
+                    minimum = prop("dev.test_coverage").toBigDecimal()
+                }
+            }
         }
     }
 }

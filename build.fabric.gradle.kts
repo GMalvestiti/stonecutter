@@ -168,10 +168,6 @@ tasks {
 
         exclude("META-INF/neoforge.mods.toml")
     }
-
-    test {
-        useJUnitPlatform()
-    }
 }
 
 publishMods {

@@ -154,10 +154,6 @@ tasks {
     named("createMinecraftArtifacts") {
         dependsOn("stonecutterGenerate")
     }
-
-    test {
-        useJUnitPlatform()
-    }
 }
 
 publishMods {

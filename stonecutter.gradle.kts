@@ -38,6 +38,17 @@ stonecutter parameters {
 }
 
 tasks {
+    register("generateResources") {
+        group = "custom"
+        description = "Run datagen for all versions"
+        dependsOn(stonecutter.tasks.named("runDatagen") {
+            metadata.project.endsWith("fabric")
+        })
+        dependsOn(stonecutter.tasks.named("runData") {
+            metadata.project.endsWith("neoforge")
+        })
+    }
+
     register("publishMaven") {
         group = "custom"
         description = "Publish all versions to the Maven repository"
@@ -70,14 +81,15 @@ tasks {
         dependsOn(stonecutter.current!!.project + ":runServer")
     }
 
-    register("generateResources") {
+    register("runActiveTest") {
         group = "custom"
-        description = "Run datagen for all versions"
-        dependsOn(stonecutter.tasks.named("runDatagen") {
-            metadata.project.endsWith("fabric")
-        })
-        dependsOn(stonecutter.tasks.named("runData") {
-            metadata.project.endsWith("neoforge")
-        })
+        description = "Run test of the active Stonecutter version"
+        dependsOn(stonecutter.current!!.project + ":test")
+    }
+
+    register("runActiveTestCoverageVerification") {
+        group = "custom"
+        description = "Run test coverage verification of the active Stonecutter version"
+        dependsOn(stonecutter.current!!.project + ":jacocoTestCoverageVerification")
     }
 }
