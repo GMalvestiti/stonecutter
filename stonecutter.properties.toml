@@ -8,6 +8,8 @@ loomx.loom_version="1.17-SNAPSHOT"
 
 deps.fabric_loader="0.19.3"
 deps.caffeine="3.2.3"
+deps.junit="6.1.2"
+deps.mockito="5.23.0"
 
 mod.description="Template description"
 mod.author="GMalvestiti"

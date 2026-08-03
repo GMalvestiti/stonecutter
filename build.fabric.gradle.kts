@@ -90,7 +90,14 @@ dependencies {
 
     shadow("com.github.ben-manes.caffeine:caffeine:${property("deps.caffeine")}")
 
+    testImplementation(platform("org.junit:junit-bom:${property("deps.junit")}"))
     testImplementation("net.fabricmc:fabric-loader-junit:${property("deps.fabric_loader")}")
+
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    testImplementation("org.mockito:mockito-core:${property("deps.mockito")}")
+    testImplementation("org.mockito:mockito-junit-jupiter:${property("deps.mockito")}")
 }
 
 tasks {

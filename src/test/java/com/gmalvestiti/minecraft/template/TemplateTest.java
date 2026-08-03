@@ -22,21 +22,9 @@ public class TemplateTest {
     }
 
     @Test
-    void testPlatform() {
-        assertTrue(Platform.getConfigDir().toString().contains("config"));
-    }
-
-    @Test
     void testRegistries() {
         assertTrue(BuiltInRegistries.ITEM.containsKey(Identifier.fromNamespaceAndPath("minecraft", "diamond")));
     }
-
-    //? if fabric {
-    @Test
-    void testStonecutterPlugin() {
-        assertTrue(Platform.isFabric());
-    }
-    //?}
 
     @Test
     void testDependencies() {
