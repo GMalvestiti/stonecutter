@@ -107,6 +107,8 @@ tasks {
     }
 
     jacocoTestCoverageVerification {
+        dependsOn(jacocoTestReport)
+
         violationRules {
             rule {
                 element = "CLASS"
