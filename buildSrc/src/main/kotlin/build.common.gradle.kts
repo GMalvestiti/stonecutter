@@ -1,5 +1,6 @@
 import com.vanniktech.maven.publish.Checksum
 import com.vanniktech.maven.publish.JavadocJar
+import me.modmuss50.mpp.PublishModTask
 import me.modmuss50.mpp.ReleaseType
 
 plugins {
@@ -121,6 +122,16 @@ tasks {
                     minimum = prop("dev.test_coverage").toBigDecimal()
                 }
             }
+        }
+    }
+
+    listOf(
+        PublishToMavenLocal::class,
+        PublishToMavenRepository::class,
+        PublishModTask::class
+    ).forEach { taskClass ->
+        withType(taskClass).configureEach {
+            dependsOn(jacocoTestCoverageVerification)
         }
     }
 }
