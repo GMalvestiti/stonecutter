@@ -2,7 +2,6 @@ package com.gmalvestiti.minecraft.template;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.gmalvestiti.minecraft.template.platform.Platform;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;

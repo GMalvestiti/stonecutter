@@ -7,6 +7,7 @@ plugins {
     java
     idea
     jacoco
+    id("com.diffplug.spotless")
     id("com.vanniktech.maven.publish")
     id("me.modmuss50.mod-publish-plugin")
 }
@@ -51,13 +52,22 @@ fun getReleaseType(): ReleaseType = when (prop("publish.type").trim().lowercase(
     else -> ReleaseType.STABLE
 }
 
+val mockitoAgent = configurations.create("mockitoAgent")
+
 val rootPackage = "${prop("mod.group")}.${prop("mod.id")}"
 
 val excludedPackages = listOf(
     "${rootPackage}.datagen.*",
+    "${rootPackage}.mixin.*",
     "${rootPackage}.platform.fabric.*",
     "${rootPackage}.platform.neoforge.*"
 )
+
+dependencies {
+    mockitoAgent("org.mockito:mockito-core:${prop("deps.mockito")}") {
+        isTransitive = false
+    }
+}
 
 tasks {
     register<Copy>("installGitHooks") {
@@ -80,6 +90,9 @@ tasks {
         workingDir = project.layout.projectDirectory.dir("runTest").asFile
 
         useJUnitPlatform()
+
+        // https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+        jvmArgs("-javaagent:${mockitoAgent.asPath}")
 
         doFirst {
             workingDir.mkdirs()
@@ -137,6 +150,25 @@ tasks {
 }
 
 afterEvaluate {
+    spotless {
+        java {
+            target("src/**/*.java")
+
+            googleJavaFormat().aosp()
+
+            forbidWildcardImports()
+            removeUnusedImports()
+
+            trimTrailingWhitespace()
+            endWithNewline()
+        }
+
+        kotlinGradle {
+            target("*.gradle.kts")
+            ktlint()
+        }
+    }
+
     mavenPublishing {
         publishToMavenCentral(automaticRelease = true)
         signAllPublications()
