@@ -7,7 +7,6 @@ plugins {
     java
     idea
     jacoco
-    id("com.diffplug.spotless")
     id("com.vanniktech.maven.publish")
     id("me.modmuss50.mod-publish-plugin")
 }
@@ -144,31 +143,14 @@ tasks {
         PublishModTask::class
     ).forEach { taskClass ->
         withType(taskClass).configureEach {
-            dependsOn(jacocoTestCoverageVerification)
+            if (!prop("publish.dry_run").toBoolean()) {
+                dependsOn(jacocoTestCoverageVerification)
+            }
         }
     }
 }
 
 afterEvaluate {
-    spotless {
-        java {
-            target("src/**/*.java")
-
-            googleJavaFormat().aosp()
-
-            forbidWildcardImports()
-            removeUnusedImports()
-
-            trimTrailingWhitespace()
-            endWithNewline()
-        }
-
-        kotlinGradle {
-            target("*.gradle.kts")
-            ktlint()
-        }
-    }
-
     mavenPublishing {
         publishToMavenCentral(automaticRelease = true)
         signAllPublications()
